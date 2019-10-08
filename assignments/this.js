@@ -12,15 +12,59 @@
 // Principle 1
 
 // code example for Window Binding
+function guitar(brand) {
+  console.log(this);
+  return brand;
+}
+
+guitar("Fender");
 
 // Principle 2
 
 // code example for Implicit Binding
+const myGuitar = {
+  model: "72 Thinline",
+  sayModel: function(name) {
+    console.log(`My guitar is a ${this.model} ${name}`);
+    console.log(this);
+  },
+};
+myGuitar.sayModel("Squier");
+
+// const myGuitar = {
+//   model: "72 vintage modified",
+//   sayBrand: brand => {
+//     console.log(`My guitar is a ${this.model} ${brand}`);
+//     console.log(this);
+//   },
+// };
+
+// myGuitar.sayBrand("Squier");
 
 // Principle 3
 
 // code example for New Binding
+function Guitar(model) {
+  this.brand = "Fender";
+  this.model = model;
+  this.sayGuitar = () => {
+    console.log(`${this.brand} ${this.model}`);
+  };
+}
+
+const tele = new Guitar("Telecaster");
+tele.sayGuitar();
 
 // Principle 4
 
 // code example for Explicit Binding
+var guitar = {
+  name: function() {
+    console.log(`${this.brand} ${this.model}`);
+  },
+};
+var guitar1 = {
+  brand: "Gibson",
+  model: "Les Paul",
+};
+guitar.name.apply(guitar1);
