@@ -132,17 +132,37 @@ console.log(swordsman.destroy()); // Sir Mustachio was removed from the game.
 
 function Villian(attrs) {
   Humanoid.call(this, attrs);
-  this.destro = function() {};
+  this.castDestro = function(hero) {
+    hero.healthPoints = hero.healthPoints - 1;
+    if (hero.healthPoints <= 0) {
+      return `${hero.name} has been slain. ${hero.destroy} ${this.name} wins!`;
+    } else {
+      return `${this.name} casts destruction. ${hero.name} has ${hero.healthPoints} health points remaining.`;
+    }
+  };
 }
 
 Villian.prototype = Object.create(Humanoid.prototype);
 
 function Hero(attrs) {
   Humanoid.call(this, attrs);
-  this.holy = function() {};
+  this.castHoly = function(villian) {
+    villian.healthPoints = villian.healthPoints - 1;
+    if (villian.healthPoints <= 0) {
+      return `${villian.name} has been slain. ${villian.destroy()} ${
+        this.name
+      } wins!`;
+    } else {
+      return `${this.name} casts holy. ${villian.name} has ${villian.healthPoints} health points remaining.`;
+    }
+  };
 }
 
 Hero.prototype = Object.create(Humanoid.prototype);
+
+// Hero.prototype.holy = function() {
+//   return `${this.name} offers a greeting in ${this.language}`;
+// };
 
 const paladin = new Hero({
   createAt: new Date(),
@@ -151,7 +171,7 @@ const paladin = new Hero({
     width: 2,
     height: 4,
   },
-  healthPoints: 20,
+  healthPoints: 10,
   name: "Aargon",
   weapons: ["Sword", "Shield"],
   language: "English",
@@ -164,10 +184,24 @@ const darkMage = new Villian({
     width: 2,
     height: 3,
   },
-  healthPoints: 12,
+  healthPoints: 8,
   name: "Mathias",
   weapons: ["Staff of Fire"],
   language: "Draconian",
 });
 
-console.log(paladin.healthPoints);
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
+console.log(darkMage.castDestro(paladin));
+console.log(paladin.castHoly(darkMage));
